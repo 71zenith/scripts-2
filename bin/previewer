@@ -1,12 +1,10 @@
 #!/bin/sh
 
-CACHE="$HOME/.cache/lf/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
-
 case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
-    *.tar|*.tgz|*.tar.gz) tar tf "$1";;
-    *.zip) zipinfo -1 "$1" ;;
-    *.[1-8]) man "$1" | col -b ;;
-    *.mp3|*.mp4) file -b "$1" ;;
-    *.o) nm "$1" ;;
-    *) bat --color=always "$1" ;;
+  *.tar|*.tgz|*.tar.gz) tar tf "$1" ;;
+  *.zip) zipinfo -1 "$1" ;;
+  *.[1-8]) man "$1" | col -b ;;
+  *.mp3|*.mp4) file -b "$1" ;;
+  *.o) nm "$1" ;;
+  *) bat --color=always "$1" ;;
 esac
